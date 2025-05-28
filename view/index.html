@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <div id="app"></div>
+  <div class="middle1"><h1>Smart Home Steuerung</h1></div>
+  <!-- Second View -->
+  <div class="top-right-button">
+    <button id="loadHomeControl2">Weitere Steuerungen anzeigen</button>
+  </div>
+  
+  <h1>Licht</h1>
+  <div class="device-container">
+    <div class="device">
+      <h2>Labor</h2>
+      <button id="lichtToggleLabor" class="btn-off">AUS</button>
+      <input type="color" id="laborLightColor" />
+      <button id="setLaborLightColor">Farbe Ändern</button>
+      <input type="range" id="laborLightBrightness" min="0" max="100" />
+      <button id="setlaborLightBrightness">Helligkeit Ändern</button>
+    </div>
+    <div class="device">
+      <h2>Küche</h2>
+      <button id="lichtToggleKueche" class="btn-off">AUS</button>
+      <input type="color" id="kuecheLightColor" />
+      <button id="setKuecheLightColor">Farbe Ändern</button>
+      <input type="range" id="kuecheLightBrightness" min="0" max="100" />
+      <button id="setKuecheLightBrightness">Helligkeit Ändern</button>
+    </div>
+    <div class="device">
+      <h2>Bad</h2>
+      <button id="lichtToggleBad" class="btn-off">AUS</button>
+      <input type="color" id="badLightColor" />
+      <button id="setBadLightColor">Farbe Ändern</button>
+      <input type="range" id="badLightBrightness" min="0" max="100" />
+      <button id="setBadLightBrightness">Helligkeit Ändern</button>
+    </div>
+    <div class="device">
+      <h2>IoT</h2>
+      <button id="lichtToggleIoT" class="btn-off">AUS</button>
+      <input type="color" id="iotLightColor" />
+      <button id="setIoTLightColor">Farbe Ändern</button>
+      <input type="range" id="iotLightBrightness" min="0" max="100" />
+      <button id="setIoTLightBrightness">Helligkeit Ändern</button>
+    </div>
+    <div class="device">
+      <h2>Multimedia</h2>
+      <button id="lichtToggleMultimedia" class="btn-off">AUS</button>
+      <input type="color" id="multimediaLightColor" />
+      <button id="multimediaLichtFarbe">Farbe Ändern</button>
+      <input type="range" id="multimediaLightBrightness" min="0" max="100" />
+      <button id="setMultimediaLightBrightness">Helligkeit Ändern</button>
+    </div>
+  </div>
+  <h1>Rolladen</h1>
+  <div class="device-container">
+    <div class="device">
+      <h2>Konferenz 1</h2>
+      <button id="rolladenRunter">Runter</button>
+      <button id="rolladenStopp">Stop</button>
+      <button id="rolladenHoch">Hoch</button>
+    </div>
+    <div class="device">
+      <h2>Konferenz 2</h2>
+      <button id="rolladenKonferenz2Runter">Runter</button>
+      <button id="rolladenKonferenz2Stopp">Stop</button>
+      <button id="rolladenKonferenz2Hoch">Hoch</button>
+    </div>
+    <div class="device">
+      <h2>Multimedia</h2>
+      <button id="rolladenMultimediaRunter">Runter</button>
+      <button id="rolladenMultimediaStopp">Stop</button>
+      <button id="rolladenMultimediaHoch">Hoch</button>
+    </div>
+    <div class="device">
+      <h2>Alle</h2>
+      <button id="rolladenAlleRunter">Runter</button>
+      <button id="rolladenAlleStopp">Stop</button>
+      <button id="rolladenAlleHoch">Hoch</button>
+    </div>
+  </div>  
+  <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+</body>
+</html>

@@ -1,0 +1,208 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f2f4f8;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Dark Mode – globale Basis */
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Überschriften */
+.dark-mode h1,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5 {
+  color: #ffffff;
+}
+.dark-mode .device-container {
+  background-color: #121212; 
+  color: #ffffff;            
+}
+.dark-mode h2 {
+  color: black;
+}
+
+/* Buttons */
+.dark-mode button {
+  background-color: #2c2c2c;
+  color: #f1f1f1;
+  border: 1px solid #444;
+}
+
+/* Optional: Hover-Zustände */
+.dark-mode button:hover {
+  background-color: grey;
+  color: #fff;
+}
+
+.dark-mode .device {
+  flex: 1 1 400px;
+  max-width: 230px;
+  background: white;
+  border-radius: 50px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1, h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.container, .device-container {
+  max-width: 1500px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+}
+.homecontrol2-container .device {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 50px;
+}
+
+.homecontrol2-container .button-row {
+  margin-top: bottom; 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.button-row {
+  padding: 10px 30px;
+  font-size: 0.95em;
+  min-width: 120px;
+}
+
+.device {
+  flex: 1 1 400px;
+  max-width: 230px;
+  
+  background: #fff;
+  border-radius: 50px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.device h2 {
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #ddd;
+  color: #333;
+  border: none;
+  padding: 15px 15px;
+  font-size: 1em;
+  margin: 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 160px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+button:hover {
+  background-color: #bbb;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button.active,
+button.btn-on {
+  background-color: green;
+  color: white;
+}
+
+
+
+.btn-on:hover {
+  background-color: #45a049;
+}
+
+button.btn-off {
+  background-color: red;
+  color: white;
+}
+
+.btn-off:hover {
+  background-color: #c62828;
+}
+
+.toggle-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.toggle-btn:hover {
+  background-color: #0056b3;
+}
+
+.rolladen-button {
+  background-color: #2196f3;
+  color: white;
+}
+
+.top-right-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+.middle1{
+  position: absolute;
+  top: 20px;
+  left: 780px;
+  z-index: 1000;
+}
+.middle2{
+  position: absolute;
+  top: 20px;
+  left: 700px;
+  z-index: 1000;
+  /*top: 20px;
+  align-items: center;*/
+}
+
+.top-right-button button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.top-right-button button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+  .device {
+    width: 90%;
+  }
+
+  button {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
