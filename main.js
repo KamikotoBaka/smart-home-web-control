@@ -17,7 +17,7 @@ async function initMainView() {
   const { View } = await import('./view/view.js');
   const { IndexController } = await import('./controller/IndexController.js');
 
-  const model = new OpenHAB("http://192.168.0.5:8080/rest", "login", "passwort");
+  const model = new OpenHAB("http://192.168.0.5:8080/rest", "login", "password");
   const view = new View(model);
   const controller = new IndexController(model, view);
   closeCurrentEventSource();
@@ -91,7 +91,7 @@ async function initHomeControl2() {
   const { View } = await import('./view/view.js');
   const { IndexController } = await import('./controller/IndexController.js');
 
-  const model = new OpenHAB("http://192.168.0.5:8080/rest", "login", "passwort");
+  const model = new OpenHAB("http://192.168.0.5:8080/rest", "login", "password");
   const view = new View(model);
   const controller = new IndexController(model, view);
   closeCurrentEventSource();
