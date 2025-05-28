@@ -35,6 +35,6 @@ Dynamically updates the UI based on current OpenHAB item states.
 👤 Basic Authentication
 Secure communication via HTTP Basic Auth (built-in to OpenHAB REST API).
 
-🙋 Contact
+🙋 
 Developed by KamikotoBaka
 Smart Home Lab – Hochschule Furtwangen
