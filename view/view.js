@@ -57,137 +57,137 @@ export class View {
     };
 
     //Konferenz 1 Jalousie Buttons  
-    if (this.buttons.rolladenRunter) {this.buttons.rolladenRunter.addEventListener("click", () => this.onJalousie("DOWN"));}
-    if (this.buttons.rolladenStopp) {this.buttons.rolladenStopp.addEventListener("click", () => this.onJalousie("STOP"));}
-    if (this.buttons.rolladenHoch) {this.buttons.rolladenHoch.addEventListener("click", () => this.onJalousie("UP"));}
+    if(this.buttons.rolladenRunter) {this.buttons.rolladenRunter.addEventListener("click", () => this.onJalousie("DOWN"));}
+    if(this.buttons.rolladenStopp) {this.buttons.rolladenStopp.addEventListener("click", () => this.onJalousie("STOP"));}
+    if(this.buttons.rolladenHoch) {this.buttons.rolladenHoch.addEventListener("click", () => this.onJalousie("UP"));}
 
     //Konferenz 2 Jalousie Buttons
-    if (this.buttons.rolladenKonferenz2Runter) {this.buttons.rolladenKonferenz2Runter.addEventListener("click", () => this.onJalousieKonferenz2("DOWN"));}
-    if (this.buttons.rolladenKonferenz2Stopp) {this.buttons.rolladenKonferenz2Stopp.addEventListener("click", () => this.onJalousieKonferenz2("STOP"));}
-    if (this.buttons.rolladenKonferenz2Hoch) {this.buttons.rolladenKonferenz2Hoch.addEventListener("click", () => this.onJalousieKonferenz2("UP"));}
+    if(this.buttons.rolladenKonferenz2Runter) {this.buttons.rolladenKonferenz2Runter.addEventListener("click", () => this.onJalousieKonferenz2("DOWN"));}
+    if(this.buttons.rolladenKonferenz2Stopp) {this.buttons.rolladenKonferenz2Stopp.addEventListener("click", () => this.onJalousieKonferenz2("STOP"));}
+    if(this.buttons.rolladenKonferenz2Hoch) {this.buttons.rolladenKonferenz2Hoch.addEventListener("click", () => this.onJalousieKonferenz2("UP"));}
 
     //Multimedia Jalousie Buttons
-    if (this.buttons.rolladenMultimediaRunter) {this.buttons.rolladenMultimediaRunter.addEventListener("click", () => this.onJalousieMultimedia("DOWN"));}
-    if (this.buttons.rolladenMultimediaStopp) {this.buttons.rolladenMultimediaStopp.addEventListener("click", () => this.onJalousieMultimedia("STOP"));}
-    if (this.buttons.rolladenMultimediaHoch) {this.buttons.rolladenMultimediaHoch.addEventListener("click", () => this.onJalousieMultimedia("UP"));}
+    if(this.buttons.rolladenMultimediaRunter) {this.buttons.rolladenMultimediaRunter.addEventListener("click", () => this.onJalousieMultimedia("DOWN"));}
+    if(this.buttons.rolladenMultimediaStopp) {this.buttons.rolladenMultimediaStopp.addEventListener("click", () => this.onJalousieMultimedia("STOP"));}
+    if(this.buttons.rolladenMultimediaHoch) {this.buttons.rolladenMultimediaHoch.addEventListener("click", () => this.onJalousieMultimedia("UP"));}
     
     //Jalousie All DOWN
-    if (this.buttons.rolladenAlleRunter) {
+    if(this.buttons.rolladenAlleRunter) {
       this.buttons.rolladenAlleRunter.addEventListener("click", () => {
-        if (this.rolladenAlleCallback) this.onRolladenAlle("DOWN");});}
+        if(this.rolladenAlleCallback) this.onRolladenAlle("DOWN");});}
     
     //Jalousie All STOP
-    if (this.buttons.rolladenAlleStopp) {
+    if(this.buttons.rolladenAlleStopp) {
       this.buttons.rolladenAlleStopp.addEventListener("click", () => {
-        if (this.rolladenAlleCallback) this.onRolladenAlle("STOP");});}
+        if(this.rolladenAlleCallback) this.onRolladenAlle("STOP");});}
     
     //Jalousie All UP
-    if (this.buttons.rolladenAlleHoch) {
+    if(this.buttons.rolladenAlleHoch) {
       this.buttons.rolladenAlleHoch.addEventListener("click", () => {
-        if (this.rolladenAlleCallback) this.onRolladenAlle("UP");});}
+        if(this.rolladenAlleCallback) this.onRolladenAlle("UP");});}
     
     //Meeting Button
-    if (this.buttons.startMeetingToggle) {
+    if(this.buttons.startMeetingToggle) {
       this.buttons.startMeetingToggle.addEventListener("click", () => {
-        if (this.meetingCallback) {
+        if(this.meetingCallback) {
           const currentState = this.buttons.startMeetingToggle.textContent.includes("EIN") ? "AUS" : "EIN";
           this.meetingCallback(currentState);}});}
     
     //Hide Button
-    if (this.buttons.hideToggle) {
+    if(this.buttons.hideToggle) {
       this.buttons.hideToggle.addEventListener("click", () => {
-        if (this.hideCallback) {
+        if(this.hideCallback) {
           const currentState = this.buttons.hideToggle.textContent.includes("EIN") ? "AUS" : "EIN";
           this.hideCallback(currentState);}});}
     
     //Ventilation Button
-    if (this.buttons.ventilationToggle) {
+    if(this.buttons.ventilationToggle) {
       this.buttons.ventilationToggle.addEventListener("click", () => {
-      if (this.toggleCallback) this.toggleCallback("ventilationToggle");});}
+      if(this.toggleCallback) this.toggleCallback("ventilationToggle");});}
     
     //Movie Night Button
-    if (this.buttons.movieNightToggle) {
+    if(this.buttons.movieNightToggle) {
       this.buttons.movieNightToggle.addEventListener("click", () => {
-      if (this.toggleCallback) this.toggleCallback("movieNightToggle");});}
+      if(this.toggleCallback) this.toggleCallback("movieNightToggle");});}
     
     //Reset Button
-    if (this.buttons.resetToggle) {
+    if(this.buttons.resetToggle) {
       this.buttons.resetToggle.addEventListener("click", () => {
-        if (this.resetCallback) {this.resetCallback();}});}
+        if(this.resetCallback) {this.resetCallback();}});}
     
     //Kueche Color Button
-    if (this.buttons.setKuecheLightColor) {
+    if(this.buttons.setKuecheLightColor) {
       this.buttons.setKuecheLightColor.addEventListener("click", () => {
       const color = document.getElementById("kuecheLightColor").value;
-        if (this.colorCallback) this.colorCallback("Kueche", color);});}
+        if(this.colorCallback) this.colorCallback("Kueche", color);});}
     
     //Bad Color Button
-    if (this.buttons.setBadLightColor) {
+    if(this.buttons.setBadLightColor) {
       this.buttons.setBadLightColor.addEventListener("click", () => {
       const color = document.getElementById("badLightColor").value;
-        if (this.colorCallback) this.colorCallback("Bad", color);});}
+        if(this.colorCallback) this.colorCallback("Bad", color);});}
     
     //IoT Color Button
-    if (this.buttons.setIoTLightColor) {
+    if(this.buttons.setIoTLightColor) {
       this.buttons.setIoTLightColor.addEventListener("click", () => {
       const color = document.getElementById("iotLightColor").value;
-        if (this.colorCallback) this.colorCallback("IoT", color);});}
+        if(this.colorCallback) this.colorCallback("IoT", color);});}
     
     //Multimedia Color Button
-    if (this.buttons.multimediaLichtFarbe) {
+    if(this.buttons.multimediaLichtFarbe) {
     this.buttons.multimediaLichtFarbe.addEventListener("click", () => {
     const color = document.getElementById("multimediaLightColor").value;
-    if (this.colorCallback) {
+    if(this.colorCallback) {
       this.colorCallback("Multimedia", color);
-    } else {console.error("setColorCallback is not defined");}});}
+    }else{console.error("setColorCallback is not defined");}});}
 
     //Kueche Brightness Button
-    if (this.buttons.setKuecheLightBrightness) {
+    if(this.buttons.setKuecheLightBrightness) {
     this.buttons.setKuecheLightBrightness.addEventListener("click", () => {
     const brightness = document.getElementById("kuecheLightBrightness").value;
-    if (this.brightnessCallback) {this.brightnessCallback("Kueche", brightness);}});}
+    if(this.brightnessCallback) {this.brightnessCallback("Kueche", brightness);}});}
     
     //Bad Brightness Button
-    if (this.buttons.setBadLightBrightness) {
+    if(this.buttons.setBadLightBrightness) {
     this.buttons.setBadLightBrightness.addEventListener("click", () => {
     const brightness = document.getElementById("badLightBrightness").value;
-    if (this.brightnessCallback) {this.brightnessCallback("Bad", brightness);}});}
+    if(this.brightnessCallback) {this.brightnessCallback("Bad", brightness);}});}
     
     //IoT Brightness Button
-    if (this.buttons.setIoTLightBrightness) {
+    if(this.buttons.setIoTLightBrightness) {
     this.buttons.setIoTLightBrightness.addEventListener("click", () => {
     const brightness = document.getElementById("iotLightBrightness").value;
-    if (this.brightnessCallback) {this.brightnessCallback("IoT", brightness);}});}
+    if(this.brightnessCallback) {this.brightnessCallback("IoT", brightness);}});}
     
     //Multimedia Brightness Button
-    if (this.buttons.setMultimediaLightBrightness) {
+    if(this.buttons.setMultimediaLightBrightness) {
     this.buttons.setMultimediaLightBrightness.addEventListener("click", () => {
     const brightness = document.getElementById("multimediaLightBrightness").value;
-    if (this.brightnessCallback) {this.brightnessCallback("Multimedia", brightness);}});}
+    if(this.brightnessCallback) {this.brightnessCallback("Multimedia", brightness);}});}
     
     //Party Button
-    if (this.buttons.partyToggle) {
+    if(this.buttons.partyToggle) {
       this.buttons.partyToggle.addEventListener("click", () => {
       const command = this.buttons.partyToggle.textContent.includes("EIN") ? "AUS" : "EIN";
-    if (this.partyCallback) {this.partyCallback(command);
-    } else {console.error("partyCallback is not defined");}});}
+    if(this.partyCallback) {this.partyCallback(command);
+    }else{console.error("partyCallback is not defined");}});}
     
     //Save energy Button
-    if (this.buttons.energySaveToggle) {
+    if(this.buttons.energySaveToggle) {
       this.buttons.energySaveToggle.addEventListener("click", () => {
-      if (this.toggleCallback) this.toggleCallback("energySaveToggle");});}
+      if(this.toggleCallback) this.toggleCallback("energySaveToggle");});}
     
       //Labor Color Button
-    if (this.buttons.setLaborLightColor) {
+    if(this.buttons.setLaborLightColor) {
       this.buttons.setLaborLightColor.addEventListener("click", () => {
       const color = document.getElementById("laborLightColor").value;
-      if (this.laborColorCallback) this.laborColorCallback(color);});}
+      if(this.laborColorCallback) this.laborColorCallback(color);});}
     
       //Labor Brightness Button
-    if (this.buttons.setlaborLightBrightness) {
+    if(this.buttons.setlaborLightBrightness) {
       this.buttons.setlaborLightBrightness.addEventListener("click", () => {
       const brightness = document.getElementById("laborLightBrightness").value;
-      if (this.laborBrightnessCallback) this.laborBrightnessCallback(brightness);});}
+      if(this.laborBrightnessCallback) this.laborBrightnessCallback(brightness);});}
 
     const allButtons = [
       "lichtToggleLabor",
@@ -201,9 +201,9 @@ export class View {
       "ventilationToggle",
     ];
     
-    for (const name of allButtons) {
+    for(const name of allButtons) {
       const button = this.buttons[name];
-      if (button) {button.addEventListener("click", () => {if (this.toggleCallback) this.toggleCallback(name);});}}
+      if(button) {button.addEventListener("click", () => {if (this.toggleCallback) this.toggleCallback(name);});}}
   }
   setToggleCallback(callback) {this.toggleCallback = callback;}
 
@@ -246,7 +246,7 @@ export class View {
   //Pop-UP Notification
   showToast(message, duration = 10000) {
   let container = document.getElementById('toast-container');
-  if (!container) {
+  if(!container) {
     container = document.createElement('div');
     container.id = 'toast-container';
     container.style.position = 'fixed';
@@ -272,23 +272,23 @@ export class View {
   //Button State for SSE
   getButtonState(buttonName) {
   const button = document.getElementById(buttonName);
-  if (!button) return null;
-  if (button.classList.contains("btn-on")) return "ON";
-  if (button.classList.contains("btn-off")) return "OFF";
-  if (/EIN/.test(button.textContent)) return "ON";
-  if (/AUS/.test(button.textContent)) return "OFF";
+  if(!button) return null;
+  if(button.classList.contains("btn-on")) return "ON";
+  if(button.classList.contains("btn-off")) return "OFF";
+  if(/EIN/.test(button.textContent)) return "ON";
+  if(/AUS/.test(button.textContent)) return "OFF";
   return null;
   }
 
   update(name, state, data) {
   const button = document.getElementById(name);
-  if (!button) return;
+  if(!button) return;
 
-  if (state === "ON") {
+  if(state === "ON") {
     button.textContent = "EIN";
     button.classList.remove("btn-off");
     button.classList.add("btn-on");
-  } else {
+  }else{
     button.textContent = "AUS";
     button.classList.remove("btn-on");
     button.classList.add("btn-off");

@@ -27,14 +27,14 @@ export class IndexController {
   async init(buttonName, itemNames) {
   this.items[buttonName] = itemNames;
   const states = [];
-  for (const itemName of itemNames) {
+  for(const itemName of itemNames) {
     const state = await this.model.getItemState(itemName);
     states.push(state);}
   const allOn = states.every(state => state === "ON");
   this.view.update(buttonName, allOn ? "ON" : "OFF");}
 
   async toggleLight(buttonName) {
-  if (buttonName === "lichtToggleLabor") {
+  if(buttonName === "lichtToggleLabor") {
   const relatedButtons = [
   "lichtToggleKueche",
   "lichtToggleBad",
@@ -44,22 +44,22 @@ export class IndexController {
     // Check if ALL 4 are ON
     let allOn = true;
     let anyOff = false;
-    for (const btn of relatedButtons) {
+    for(const btn of relatedButtons) {
       const btnItems = this.items[btn];
-      if (btnItems && btnItems.length > 0) {
+      if(btnItems && btnItems.length > 0) {
         const states = await Promise.all(
           btnItems.map(item => this.model.getItemState(item))
-        );if (states.every(state => state === "ON")) {
-        } else {
+        );if(states.every(state => state === "ON")) {
+        }else{
           allOn = false;
           anyOff = true;}}}
 
     // If all are ON, turn all OFF, else turn all ON
     const newState = allOn ? "OFF" : "ON";
-    for (const btn of relatedButtons) {
+    for(const btn of relatedButtons) {
       const btnItems = this.items[btn];
-      if (btnItems && btnItems.length > 0) {
-        for (const item of btnItems) {await this.model.sendCommand(item, newState);}
+      if(btnItems && btnItems.length > 0) {
+        for(const item of btnItems) {await this.model.sendCommand(item, newState);}
         this.view.update(btn, newState);}}
     this.view.update(buttonName, newState); 
     return;
@@ -67,16 +67,16 @@ export class IndexController {
 
   // Default logic for other buttons
   const itemNames = this.items[buttonName];
-  if (!itemNames || itemNames.length === 0) return;
+  if(!itemNames || itemNames.length === 0) return;
 
   let atLeastOneOn = false;
-  for (const itemName of itemNames) {
+  for(const itemName of itemNames) {
     const state = await this.model.getItemState(itemName);
-    if (state === "ON") {
+    if(state === "ON") {
       atLeastOneOn = true;
       break;}}
   const newState = atLeastOneOn ? "OFF" : "ON";
-  for (const itemName of itemNames) {await this.model.sendCommand(itemName, newState);}
+  for(const itemName of itemNames) {await this.model.sendCommand(itemName, newState);}
   this.view.update(buttonName, newState);}
 
  //Meeting Button
@@ -88,8 +88,8 @@ export class IndexController {
    // Map "EIN" and "AUS" to "ON" and "OFF"
   const mappedCommand = command === "EIN" ? "ON" : "OFF";
   try {
-    if (mappedCommand === "ON") {
-      if (this.isMeetingActive) return;
+    if(mappedCommand === "ON") {
+      if(this.isMeetingActive) return;
       this.isMeetingActive = true;
 
       await this.model.sendCommand(jalousieItem, "DOWN");
@@ -102,14 +102,13 @@ export class IndexController {
         } catch (error) {
           console.error("Error during STOP or light ON:", error);}
       }, 10000);
-    } else if (mappedCommand === "OFF") {
+    } else if(mappedCommand === "OFF") {
       this.isMeetingActive = false;
 
       await this.model.sendCommand(jalousieItem, "UP");
       await this.model.sendCommand(lightItem, "OFF");
-      this.view.update("startMeetingToggle", "OFF");
-    }
-  } catch (error) {console.error("Error in meetingControl:", error);}
+      this.view.update("startMeetingToggle", "OFF");}
+  } catch(error) {console.error("Error in meetingControl:", error);}
 }
   //Party Button
   async partyControl(command) {
@@ -122,13 +121,12 @@ export class IndexController {
     const mappedCommand = command === "EIN" ? "ON" : "OFF";
 
     try {
-      if (mappedCommand === "ON") {
+      if(mappedCommand === "ON") {
       await Promise.all(soundItems.map(soundItem => this.model.sendCommand(soundItem, musicItem)));
       this.view.update("partyToggle", "ON");
-      } else if (mappedCommand === "OFF") {
+      } else if(mappedCommand === "OFF") {
       await Promise.all(soundItems.map(soundItem => this.model.sendCommand(soundItem, "OFF")));
-      this.view.update("partyToggle", "OFF");
-      }
+      this.view.update("partyToggle", "OFF");}
     } catch (error) {console.error("Error in partyControl:", error);}
   }
 
@@ -139,19 +137,19 @@ export class IndexController {
     const mappedCommand = command === "EIN" ? "ON" : "OFF";
 
     try {
-      if (mappedCommand === "ON") {
+      if(mappedCommand === "ON") {
         // Jalousie DOWN
         await this.model.sendCommand(jalousieItem, "DOWN");
         await this.model.sendCommand(hideItem, "ON");
         this.view.update("hideToggle", "ON");
       }
-      else if (mappedCommand === "OFF") {
+      else if(mappedCommand === "OFF") {
         // Jalousie UP
         await this.model.sendCommand(jalousieItem, "UP");
         await this.model.sendCommand(hideItem, "OFF");
         this.view.update("hideToggle", "OFF");
       }
-    } catch (error) {console.error("Error in hideControl:", error);}
+    } catch(error) {console.error("Error in hideControl:", error);}
   }
 
   // Reset Button
@@ -184,10 +182,10 @@ export class IndexController {
     "iKonferenz_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark"];
     try {
       // Turn off all linkinpark items
-      for (const linkinParkItem of linkinParkItems) {await this.model.sendCommand(linkinParkItem, "OFF");}
+      for(const linkinParkItem of linkinParkItems) {await this.model.sendCommand(linkinParkItem, "OFF");}
       
       // Turn off all sound items
-      for (const soundItem of soundItems) {await this.model.sendCommand(soundItem, "STOP");}
+      for(const soundItem of soundItems) {await this.model.sendCommand(soundItem, "STOP");}
       
       // Turn off all TVs
       await this.model.sendCommand(movieNightItem, "OFF");
@@ -196,10 +194,10 @@ export class IndexController {
       await this.model.sendCommand(ventilationItem, "OFF");
       
       // Jalousie UP
-      for (const jalousieItem of jalousieItems) {await this.model.sendCommand(jalousieItem, "UP");}
+      for(const jalousieItem of jalousieItems) {await this.model.sendCommand(jalousieItem, "UP");}
      
       // Turn off all lights
-      for (const lightItem of lightItems) {await this.model.sendCommand(lightItem, "OFF");}
+      for(const lightItem of lightItems) {await this.model.sendCommand(lightItem, "OFF");}
 
       // Turn off coffee machine
       await this.model.sendCommand(coffeeItem, "OFF");
@@ -211,7 +209,7 @@ export class IndexController {
       await this.model.sendCommand(hideItem, "OFF");
   
       console.log("Reset completed successfully.");
-    } catch (error) {console.error("Error in resetControl:", error);}
+    } catch(error) {console.error("Error in resetControl:", error);}
   }
 
   // Jalousie Control Konferenz 1 
@@ -224,9 +222,9 @@ export class IndexController {
   
     try {
       // Check the state of all window sensors
-      for (const sensor of windowSensors) {
+      for(const sensor of windowSensors) {
         const sensorState = await this.model.getItemState(sensor);
-        if (command === "DOWN" && sensorState === "OPEN") {
+        if(command === "DOWN" && sensorState === "OPEN") {
           this.view.showToast(`Warnung: Fenstersensor ${sensor} ist geöffnet. Bitte schließen Sie die Fenster, bevor Sie den Rolladen herunterrollen.`);
           console.log(`Window sensor ${sensor} is open. Rolladen cannot go down.`);
           return; // Prevent rolladen from going down
@@ -235,7 +233,7 @@ export class IndexController {
       // Execute the command for the rolladen
       await this.model.sendCommand(itemName, command);
       console.log(`Rolladen executed command: ${command}`);
-    } catch (error) {console.error(`Error executing command "${command}" for rolladen:`, error);}
+    } catch(error) {console.error(`Error executing command "${command}" for rolladen:`, error);}
   }
 
   // Jalousie Control Konferenz 2
@@ -246,9 +244,9 @@ export class IndexController {
       "iKonferenz_Homematic_Fenster2_Position",
       "iKonferenz_Homematic_Fenster3_Position"];
     try {
-      for (const sensor of windowSensors) {
+      for(const sensor of windowSensors) {
         const sensorState = await this.model.getItemState(sensor);
-        if (command === "DOWN" && sensorState === "OPEN") {
+        if(command === "DOWN" && sensorState === "OPEN") {
           this.view.showToast(`Warnung: Fenstersensor ${sensor} ist geöffnet. Bitte schließen Sie die Fenster, bevor Sie den Rolladen herunterrollen.`);
           console.log(`Window sensor ${sensor} is open. Rolladen cannot go down.`);
           return;
@@ -256,7 +254,7 @@ export class IndexController {
       }
       await this.model.sendCommand(itemName, command);
       console.log(`Rolladen executed command: ${command}`);
-    } catch (error) {console.error(`Error executing command "${command}" for rolladen:`, error);}
+    } catch(error) {console.error(`Error executing command "${command}" for rolladen:`, error);}
   }
 
   // Jalousie Controll Multimedia
@@ -267,9 +265,9 @@ export class IndexController {
       "iMultimedia_Homematic_Fenster2_Position",
       "iMultimedia_Homematic_Fenster3_Position"];
     try {
-      for (const sensor of windowSensors) {
+      for(const sensor of windowSensors) {
         const sensorState = await this.model.getItemState(sensor);
-        if (command === "DOWN" && sensorState === "OPEN") {
+        if(command === "DOWN" && sensorState === "OPEN") {
           this.view.showToast(`Warnung: Fenstersensor ${sensor} ist geöffnet. Bitte schließen Sie die Fenster, bevor Sie den Rolladen herunterrollen.`);
           console.log(`Window sensor ${sensor} is open. Rolladen cannot go down.`);
           return;
@@ -277,7 +275,7 @@ export class IndexController {
       }
       await this.model.sendCommand(itemName, command);
       console.log(`Rolladen executed command: ${command}`);
-    } catch (error) {console.error(`Error executing command "${command}" for rolladen:`, error);}
+    } catch(error) {console.error(`Error executing command "${command}" for rolladen:`, error);}
   }
   // All Jaloisie 
   async controlAlleRolladen(command) {
@@ -296,15 +294,15 @@ export class IndexController {
       "iMultimedia_Homematic_Fenster2_Position",
       "iMultimedia_Homematic_Fenster3_Position",];
     try {
-      for (const sensor of windowSensors) {
+      for(const sensor of windowSensors) {
         const sensorState = await this.model.getItemState(sensor);
-        if (command === "DOWN" && sensorState === "OPEN") {
+        if(command === "DOWN" && sensorState === "OPEN") {
           this.view.showToast(`Warnung: Fenstersensor ${sensor} ist geöffnet. Bitte schließen Sie die Fenster, bevor Sie den Rolladen herunterrollen.`);
           console.log(`Window sensor ${sensor} is open. Rolladen cannot go down.`);
           return;
         }
       }
-      for (const jalousieItem of jalousieItems) {await this.model.sendCommand(jalousieItem, command);}
+      for(const jalousieItem of jalousieItems) {await this.model.sendCommand(jalousieItem, command);}
       console.log(`All rolladen executed command: ${command}`);
     } catch (error) {console.error(`Error executing command "${command}" for all rolladen:`, error);}
   }
@@ -320,7 +318,7 @@ export class IndexController {
     IoT: "iIoT_Hue_Lampen_Farbe"};
 
   const api = lightColorAPIs[lightName];
-  if (!api) {
+  if(!api) {
     console.error(`No API found for light: ${lightName}`);
     return;
   }
@@ -330,7 +328,7 @@ export class IndexController {
   const hsbColor = this.rgbToHsb(r, g, b);
   await this.model.sendCommand(api, hsbColor);
   console.log(`Set color of ${lightName} light to ${hsbColor}`);
-  } catch (error) {console.error(`Error setting color for ${lightName} light:`, error);}
+  } catch(error) {console.error(`Error setting color for ${lightName} light:`, error);}
   }
 
   async setLightColorLabor(color) {
@@ -345,7 +343,7 @@ export class IndexController {
     const hsbColor = this.rgbToHsb(r, g, b);
     await Promise.all(laborLightItems.map(item => this.model.sendCommand(item, hsbColor)));
     console.log(`Set Labor lights color to ${hsbColor}`);
-  } catch (error) {console.error("Error setting Labor lights color:", error);}
+  } catch(error) {console.error("Error setting Labor lights color:", error);}
   }
 
   // Light Brightness Control
@@ -359,15 +357,15 @@ export class IndexController {
     IoT: "iIoT_Hue_Lampen_Helligkeit"};
 
   const api = lightBrightnessAPIs[lightName];
-  if (!api) {
+  if(!api) {
     console.error(`No API found for light: ${lightName}`);
     return;
   }
   try {
-    if (brightness < 0 || brightness > 100) {throw new Error("Brightness must be between 0 and 100.");}
+    if(brightness < 0 || brightness > 100) {throw new Error("Brightness must be between 0 and 100.");}
     await this.model.sendCommand(api, brightness.toString());
     console.log(`Set brightness of ${lightName} light to ${brightness}`);
-  } catch (error) {console.error(`Error setting brightness for ${lightName} light:`, error);}
+  } catch(error) {console.error(`Error setting brightness for ${lightName} light:`, error);}
   }
 
   // Labor Light Brightness Control
@@ -380,18 +378,18 @@ export class IndexController {
     "iBad_Hue_Lampen_Helligkeit",
     "iIoT_Hue_Lampen_Helligkeit"];
   try {
-    if (brightness < 0 || brightness > 100) {throw new Error("Brightness must be between 0 and 100.");}
+    if(brightness < 0 || brightness > 100) {throw new Error("Brightness must be between 0 and 100.");}
     await Promise.all(laborBrightnessItems.map(item => this.model.sendCommand(item, brightness.toString())));
     console.log(`Set Labor lights brightness to ${brightness}`);
-  } catch (error) {console.error("Error setting Labor lights brightness:", error);}
+  } catch(error) {console.error("Error setting Labor lights brightness:", error);}
   }
 
   //Live Updates
   startLiveUpdates() {
   // Mapping von Item-Name → Button-Name (für die View)
   const itemToButtonMap = {};
-  for (const [buttonName, itemNames] of Object.entries(this.items)) {
-    for (const itemName of itemNames) {itemToButtonMap[itemName] = buttonName;}
+  for(const [buttonName, itemNames] of Object.entries(this.items)) {
+    for(const itemName of itemNames) {itemToButtonMap[itemName] = buttonName;}
   }
   const allItemNames = Object.values(this.items).flat();
 
@@ -400,11 +398,11 @@ export class IndexController {
     const newState = data.payload.state;
     const buttonName = itemToButtonMap[itemName];
 
-    if (buttonName) {this.view.update(buttonName, newState);}});
+    if(buttonName) {this.view.update(buttonName, newState);}});
   }
 
   rgbToHsb(r, g, b) {
-    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
+    if(r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
     throw new Error("Invalid RGB values. Each value must be between 0 and 255.");
   }
 
@@ -420,13 +418,13 @@ export class IndexController {
 
   // Calculate Hue
   let h = 0;
-  if (delta !== 0) {
-    if (max === rPercent) {h = ((gPercent - bPercent) / delta) % 6;
-    } else if (max === gPercent) {h = (bPercent - rPercent) / delta + 2;
+  if(delta !== 0) {
+    if(max === rPercent) {h = ((gPercent - bPercent) / delta) % 6;
+    } else if(max === gPercent) {h = (bPercent - rPercent) / delta + 2;
     } else {h = (rPercent - gPercent) / delta + 4;
     }
     h = Math.round(h * 60);
-    if (h < 0) h += 360;
+    if(h < 0) h += 360;
   }
 
   // Calculate Saturation

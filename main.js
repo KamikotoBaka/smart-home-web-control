@@ -17,7 +17,7 @@ async function initMainView() {
   const { View } = await import('./view/view.js');
   const { IndexController } = await import('./controller/IndexController.js');
 
-  const model = new OpenHAB("http://192.168.0.5:8080/rest", "login", "passwort");
+  const model = new OpenHAB("http://192.168.0.5:8080/rest", "openHABAdmin", "hJem2jz6");
   const view = new View(model);
   const controller = new IndexController(model, view);
   closeCurrentEventSource();
@@ -40,24 +40,24 @@ async function initMainView() {
   allItemNames.forEach(item => {firstSSEReceived[item] = false;});
 
   currentEventSource = model.listenToEvents(allItemNames, (event) => {
-  if (event.type !== "ItemStateChangedEvent") return;
+  if(event.type !== "ItemStateChangedEvent") return;
 
   const itemName = event.topic.split('/')[2];
   let newState;
-  if (typeof event.payload === "string") {
+  if(typeof event.payload === "string") {
     try {const payloadObj = JSON.parse(event.payload);
       newState = payloadObj.value || payloadObj.state || payloadObj;
-    } catch (e) {newState = event.payload;}
-  }else if (typeof event.payload === "object" && event.payload !== null) {newState = event.payload.value || event.payload.state || event.payload;
+    } catch(e) {newState = event.payload;}
+  }else if(typeof event.payload === "object" && event.payload !== null) {newState = event.payload.value || event.payload.state || event.payload;
   }else {newState = event.payload;}
 
   currentStates[itemName] = newState;
 
-  if (!firstSSEReceived[itemName]) {firstSSEReceived[itemName] = true;}
+  if(!firstSSEReceived[itemName]) {firstSSEReceived[itemName] = true;}
 
   // Updating individual buttons
-  for (const [buttonName, itemNames] of Object.entries(controller.items)) {
-    if (itemNames.includes(itemName)) {const allOn = itemNames.every((item) => currentStates[item] === "ON");
+  for(const [buttonName, itemNames] of Object.entries(controller.items)) {
+    if(itemNames.includes(itemName)) {const allOn = itemNames.every((item) => currentStates[item] === "ON");
       view.update(buttonName, allOn ? "ON" : "OFF");}}
 
   // Update the lab button
@@ -91,7 +91,7 @@ async function initHomeControl2() {
   const { View } = await import('./view/view.js');
   const { IndexController } = await import('./controller/IndexController.js');
 
-  const model = new OpenHAB("http://192.168.0.5:8080/rest", "login", "passwort");
+  const model = new OpenHAB("http://192.168.0.5:8080/rest", "openHABAdmin", "hJem2jz6");
   const view = new View(model);
   const controller = new IndexController(model, view);
   closeCurrentEventSource();
@@ -121,21 +121,21 @@ async function initHomeControl2() {
   allItemNames.forEach(item => {firstSSEReceived[item] = false;});
 
   currentEventSource = model.listenToEvents(allItemNames, (event) => {
-  if (event.type === "ItemStateChangedEvent") {
+  if(event.type === "ItemStateChangedEvent") {
     const itemName = event.topic.split('/')[2];
 
     let newState;
-    if (typeof event.payload === "string") {
+    if(typeof event.payload === "string") {
       try {const payloadObj = JSON.parse(event.payload);
         newState = payloadObj.value || payloadObj.state || payloadObj;
-      } catch (e) {newState = event.payload;}
-    } else if (typeof event.payload === "object" && event.payload !== null) {newState = event.payload.value || event.payload.state || event.payload;
+      } catch(e) {newState = event.payload;}
+    } else if(typeof event.payload === "object" && event.payload !== null) {newState = event.payload.value || event.payload.state || event.payload;
     } else {newState = event.payload;}
 
     currentStates[itemName] = newState;
-      if (!firstSSEReceived[itemName]) {firstSSEReceived[itemName] = true;}
-      for (const [buttonName, itemNames] of Object.entries(controller.items)) {
-        if (itemNames.includes(itemName)) {
+      if(!firstSSEReceived[itemName]) {firstSSEReceived[itemName] = true;}
+      for(const [buttonName, itemNames] of Object.entries(controller.items)) {
+        if(itemNames.includes(itemName)) {
           const allOn = itemNames.every((item) => currentStates[item] === "ON");
           view.update(buttonName, allOn ? "ON" : "OFF");}}}
   });
@@ -154,10 +154,10 @@ async function initHomeControl2() {
 
 function setupDarkModeToggle() {
   const button = document.getElementById("darkModeToggle");
-  if (!button) return;
+  if(!button) return;
 
   // Restore the state
-  if (localStorage.getItem("darkMode") === "on") {
+  if(localStorage.getItem("darkMode") === "on") {
     document.body.classList.add("dark-mode");
     button.textContent = "Dark Mode AUS";
   }
@@ -177,13 +177,13 @@ async function bootstrap() {
   await initMainView();
   //HomeControl2
   document.addEventListener("click", async (e) => {
-    if (e.target.id === "loadHomeControl2") {
+    if(e.target.id === "loadHomeControl2") {
       await loadView('./view/homecontrol2.html');
       setupDarkModeToggle(); 
       await initHomeControl2();
     }
     //Back to MainView
-    if (e.target.id === "goToMainView") {
+    if(e.target.id === "goToMainView") {
       await loadView('./view/index.html');
       await initMainView();
     }
