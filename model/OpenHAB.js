@@ -6,20 +6,25 @@ export class OpenHAB {
     this.username = username;
     this.password = password;
   }
+
+
   // Observer registrieren
   async addObserver(observerFn) {
     this.observers.push(observerFn);
   }
+
 
   // Observer entfernen (optional)
   async removeObserver(observerFn) {
     this.observers = this.observers.filter(obs => obs !== observerFn);
   }
 
+
   // Observer benachrichtigen
   async notifyObservers() {
     this.observers.forEach(observerFn => observerFn(this.data));
   }
+
 
   // Daten setzen und Observer benachrichtigen
   async setData(newData) {
@@ -27,9 +32,11 @@ export class OpenHAB {
     this.notifyObservers();
   }
 
+
   async getData() {
     return this.data;
   }
+
 
   async getItemState(itemName) {
     const response = await fetch(`${this.baseUrl}/items/${itemName}/state`, {
@@ -38,6 +45,7 @@ export class OpenHAB {
     if (!response.ok) throw new Error(`Fehler beim Abrufen von ${itemName}`);
     return response.text();
   }
+
 
   async sendCommand(itemName, command) {
     const response = await fetch(`${this.baseUrl}/items/${itemName}`, {
@@ -53,6 +61,7 @@ export class OpenHAB {
     return response;
   }
 
+
   async postUpdate(itemName, state) {
     const response = await fetch(`${this.baseUrl}/items/${itemName}/state`, {
       method: "PUT",
@@ -66,6 +75,7 @@ export class OpenHAB {
     return response;
   }
 
+
   _getAuthHeaders() {
     if (this.username && this.password) {
       return {
@@ -74,6 +84,7 @@ export class OpenHAB {
     }
     return {};
   }
+
 
   /**
    * Listen to OpenHAB SSE events for one or more items.

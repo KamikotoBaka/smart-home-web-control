@@ -1,16 +1,21 @@
 const currentStates = {};
 let currentEventSource = null;
 let firstSSEReceived = {};
+
+
 function closeCurrentEventSource() {
   if (currentEventSource) {
     currentEventSource.close();
     currentEventSource = null;
   }
 }
+
+
 async function loadView(path) {
   const html = await fetch(path).then(res => res.text());
   document.getElementById('app').innerHTML = html;
 }
+
 
 async function initMainView() {
   const { OpenHAB } = await import('./model/OpenHAB.js');
@@ -90,6 +95,8 @@ async function initMainView() {
   view.setLaborBrightnessCallback((brightness) => controller.setLightBrightnessLabor(brightness));
   controller.startLiveUpdates();
 }
+
+
 async function initHomeControl2() {
   const { OpenHAB } = await import('./model/OpenHAB.js');
   const { View } = await import('./view/view.js');
@@ -160,6 +167,7 @@ async function initHomeControl2() {
   controller.startLiveUpdates();
 }
 
+
 function setupDarkModeToggle() {
   const button = document.getElementById("darkModeToggle");
   if(!button) return;
@@ -179,6 +187,7 @@ function setupDarkModeToggle() {
   });
 }
 
+
 async function bootstrap() {
   await loadView('./view/index.html');
   setupDarkModeToggle(); 
@@ -197,6 +206,7 @@ async function bootstrap() {
     }
   });
 }
+
 
 bootstrap();
 

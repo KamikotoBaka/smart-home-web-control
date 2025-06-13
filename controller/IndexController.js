@@ -15,6 +15,8 @@ export class IndexController {
     this.view.setRolladenMultimediaCallback(this.controlMultimediaRolladen.bind(this));
     this.view.setRolladenAlleCallback(this.controlAlleRolladen.bind(this));
   }
+
+
   setupUI() {
   const input = document.getElementById('input');
   if (input) {
@@ -65,6 +67,7 @@ export class IndexController {
     return;
   }
 
+
   // Default logic for other buttons
   const itemNames = this.items[buttonName];
   if(!itemNames || itemNames.length === 0) return;
@@ -78,6 +81,7 @@ export class IndexController {
   const newState = atLeastOneOn ? "OFF" : "ON";
   for(const itemName of itemNames) {await this.model.sendCommand(itemName, newState);}
   this.view.update(buttonName, newState);}
+
 
  //Meeting Button
  async meetingControl(command) {
@@ -110,6 +114,8 @@ export class IndexController {
       this.view.update("startMeetingToggle", "OFF");}
   } catch(error) {console.error("Error in meetingControl:", error);}
 }
+
+
   //Party Button
   async partyControl(command) {
     const soundItems = [
@@ -129,6 +135,7 @@ export class IndexController {
       this.view.update("partyToggle", "OFF");}
     } catch (error) {console.error("Error in partyControl:", error);}
   }
+
 
   //Hide Button
   async hideControl(command) {
@@ -151,6 +158,7 @@ export class IndexController {
       }
     } catch(error) {console.error("Error in hideControl:", error);}
   }
+
 
   // Reset Button
   async resetControl() {
@@ -212,6 +220,7 @@ export class IndexController {
     } catch(error) {console.error("Error in resetControl:", error);}
   }
 
+
   // Jalousie Control Konferenz 1 
   async RolladenSteuern(command) {
     const itemName = "iKonferenz_Somfy_Rollladen2_Steuerung"; // Rolladen item
@@ -236,6 +245,7 @@ export class IndexController {
     } catch(error) {console.error(`Error executing command "${command}" for rolladen:`, error);}
   }
 
+
   // Jalousie Control Konferenz 2
   async controlKonferenz2Rolladen(command) {
     const itemName = "iKonferenz_Somfy_Rollladen1_Steuerung";
@@ -257,6 +267,7 @@ export class IndexController {
     } catch(error) {console.error(`Error executing command "${command}" for rolladen:`, error);}
   }
 
+
   // Jalousie Controll Multimedia
   async controlMultimediaRolladen(command) {
     const itemName = "iMultimedia_Somfy_Rollladen_Steuerung"; 
@@ -277,6 +288,8 @@ export class IndexController {
       console.log(`Rolladen executed command: ${command}`);
     } catch(error) {console.error(`Error executing command "${command}" for rolladen:`, error);}
   }
+
+
   // All Jaloisie 
   async controlAlleRolladen(command) {
     const jalousieItems = [
@@ -307,6 +320,7 @@ export class IndexController {
     } catch (error) {console.error(`Error executing command "${command}" for all rolladen:`, error);}
   }
   
+
   // Light Control
   async setLightColor(lightName, color) {
   console.log(`setLightColor called with lightName: ${lightName}, color: ${color}`); // Debugging
@@ -346,6 +360,7 @@ export class IndexController {
   } catch(error) {console.error("Error setting Labor lights color:", error);}
   }
 
+
   // Light Brightness Control
   async setLightBrightness(lightName, brightness) {
   console.log(`setLightBrightness called with lightName: ${lightName}, brightness: ${brightness}`); // Debugging
@@ -368,6 +383,7 @@ export class IndexController {
   } catch(error) {console.error(`Error setting brightness for ${lightName} light:`, error);}
   }
 
+
   // Labor Light Brightness Control
   async setLightBrightnessLabor(brightness) {
   console.log(`setLightBrightnessLabor called with brightness: ${brightness}`); // Debugging
@@ -383,6 +399,7 @@ export class IndexController {
     console.log(`Set Labor lights brightness to ${brightness}`);
   } catch(error) {console.error("Error setting Labor lights brightness:", error);}
   }
+
 
   //Live Updates
   startLiveUpdates() {
@@ -400,6 +417,7 @@ export class IndexController {
 
     if(buttonName) {this.view.update(buttonName, newState);}});
   }
+
 
   rgbToHsb(r, g, b) {
     if(r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
@@ -437,6 +455,7 @@ export class IndexController {
   return `${h},${s},${v}`;
   }
 
+  
   hexToRgb(hex) {
   hex = hex.replace(/^#/, "");
   const bigint = parseInt(hex, 16);

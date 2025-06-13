@@ -207,42 +207,59 @@ export class View {
   }
   setToggleCallback(callback) {this.toggleCallback = callback;}
 
+
   setRolladenCallback(callback) {this.rolladenCallback = callback;}
+
 
   setRolladenKonferenz2Callback(callback) {this.rolladenKonferenz2Callback = callback;}
 
+
   setRolladenMultimediaCallback(callback) {this.rolladenMultimediaCallback = callback;}
+
 
   setRolladenAlleCallback(callback) {this.rolladenAlleCallback = callback;}
 
+
   setMeetingCallback(callback) {this.meetingCallback = callback;}
+
 
   setHideCallback(callback) {this.hideCallback = callback;}
 
+
   setResetCallback(callback) {this.resetCallback = callback;}
+
 
   setColorCallback(callback) {this.colorCallback = callback;}
 
+
   setBrightnessCallback(callback) {this.brightnessCallback = callback;}
+
 
   setPartyCallback(callback) {this.partyCallback = callback;}
 
+
   setLaborColorCallback(callback) {this.laborColorCallback = callback;}
 
+
   setLaborBrightnessCallback(callback) {this.laborBrightnessCallback = callback;}
+
 
   //Jalousie Konferenz 1
   onJalousie(command) {if (this.rolladenCallback) this.rolladenCallback(command);}
   
+
   //Jalousie Konferenz 2
   onJalousieKonferenz2(command) {if (this.rolladenKonferenz2Callback) this.rolladenKonferenz2Callback(command);}
   
+
   //Jalousie Multimedia
   onJalousieMultimedia(command) {if (this.rolladenMultimediaCallback) this.rolladenMultimediaCallback(command);}
   
+
   //All Jalousie
   onRolladenAlle(command) {if (this.rolladenAlleCallback) this.rolladenAlleCallback(command);}
   
+
   //Pop-UP Notification
   showToast(message, duration = 10000) {
   let container = document.getElementById('toast-container');
@@ -269,6 +286,7 @@ export class View {
   }, duration);
   }
 
+
   //Button State for SSE
   getButtonState(buttonName) {
   const button = document.getElementById(buttonName);
@@ -280,6 +298,7 @@ export class View {
   return null;
   }
 
+  
   update(name, state, data) {
   const button = document.getElementById(name);
   if(!button) return;
