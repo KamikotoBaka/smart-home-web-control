@@ -298,6 +298,13 @@ export class View {
   return null;
   }
 
+
+  setServerStatus(isConnected) {
+  const bubble = document.getElementById('server-status-bubble');
+  if (!bubble) return;
+  bubble.style.background = isConnected ? 'green' : 'red';
+  }
+  
   
   update(name, state, data) {
   const button = document.getElementById(name);
