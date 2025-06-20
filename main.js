@@ -43,7 +43,9 @@ async function initMainView() {
   const view = new View(model);
   const controller = new IndexController(model, view);
   closeCurrentEventSource();
-
+  closeCurrentEventSource();
+  startServerStatusPolling(model, view);
+  
   //Light 
   await controller.init("lichtToggleKueche",["iKueche_Hue_Lampen_Schalter","iKueche_Osram_LEDStreifen_Schalter"]);
   
