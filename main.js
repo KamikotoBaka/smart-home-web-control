@@ -17,6 +17,19 @@ async function loadView(path) {
 }
 
 
+function startServerStatusPolling(model, view) {
+  async function check() {
+    try {
+      await model.getItemState("iKueche_Hue_Lampen_Schalter"); 
+      view.setServerStatus(true);
+    } catch (e) {
+      view.setServerStatus(false);
+    }
+    setTimeout(check, 5000);
+  }
+  check();
+}
+
 async function initMainView() {
   const { OpenHAB } = await import('./model/OpenHAB.js');
   const { View } = await import('./view/view.js');
